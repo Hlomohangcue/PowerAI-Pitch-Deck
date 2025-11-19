@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAI - Renewable Energy Management Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c28 0%, #2c5530 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: #7fb069;
+            border-radius: 10px;
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: #6a9657;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 100px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #7fb069;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #a8d5ba;
+        }
+
+        p, li {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #a8d5ba;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: #7fb069;
+            font-weight: bold;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .features-grid::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .features-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .features-grid::-webkit-scrollbar-thumb {
+            background: #7fb069;
+            border-radius: 10px;
+        }
+
+        .features-grid::-webkit-scrollbar-thumb:hover {
+            background: #6a9657;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(127, 176, 105, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #7fb069;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: #7fb069;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #a8d5ba;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: rgba(127, 176, 105, 0.3);
+            border: 2px solid #7fb069;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: #7fb069;
+            transform: scale(1.05);
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1.2rem;
+            color: #a8d5ba;
+        }
+
+        .logo {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: #7fb069;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #6a9657;
+            transform: scale(1.05);
+        }
+
+        ul {
+            text-align: left;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #7fb069;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #7fb069;
+            z-index: 0;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #7fb069;
+            position: relative;
+            z-index: 1;
+            width: 22%;
+        }
+
+        .roadmap-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .roadmap-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .roadmap-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .roadmap-container::-webkit-scrollbar-thumb {
+            background: #7fb069;
+            border-radius: 10px;
+        }
+
+        .roadmap-container::-webkit-scrollbar-thumb:hover {
+            background: #6a9657;
+        }
+
+        .roadmap-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #7fb069;
+            text-align: left;
+        }
+
+        .roadmap-item h3 {
+            margin-bottom: 1.5rem;
+            color: #7fb069;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .roadmap-item p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(127, 176, 105, 0.3);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #7fb069;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .investment-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+
+        .investment-reasons {
+            max-width: 800px;
+            margin: 1rem auto;
+            text-align: left;
+            font-size: 1.3rem;
+        }
+
+        .investment-reasons li {
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons .cta-button {
+            margin: 0;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .contact-info p {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            p, li { font-size: 1.2rem; }
+            
+            .slide {
+                padding: 30px 20px;
+                justify-content: flex-start;
+                padding-top: 80px;
+            }
+            
+            .slide-content {
+                padding-bottom: 120px;
+            }
+            
+            .features-grid, .stats-container, .team-grid {
+                grid-template-columns: 1fr;
+                max-height: none;
+                overflow-y: visible;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .timeline-item {
+                width: 100%;
+            }
+
+            .roadmap-container {
+                grid-template-columns: 1fr;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .roadmap-item {
+                padding: 1.5rem;
+            }
+
+            .roadmap-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .roadmap-item p {
+                font-size: 1.1rem;
+            }
+
+            .investment-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-box {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .investment-reasons {
+                font-size: 1.1rem;
+            }
+
+            .investment-reasons li {
+                font-size: 1.1rem;
+                margin-bottom: 0.7rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 15px 35px;
+            }
+
+            .contact-info p {
+                font-size: 1.1rem;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                gap: 0.5rem;
+            }
+            
+            .nav-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-number" id="slideNumber">1 / 12</div>
+    
+    <div class="slides-container" id="slidesContainer">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="logo">⚡</div>
+                <h1>PowerAI Lesotho</h1>
+                <p class="subtitle">AI-Powered Renewable Energy Management Platform</p>
+                <p style="font-size: 1.3rem; margin-top: 2rem;">Transforming Energy Management with Artificial Intelligence</p>
+                <p style="font-size: 1.2rem; color: #a8d5ba; margin-top: 1rem;">UN SDG 7 Compliant | Multi-Tenant SaaS Platform</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🌍 The Problem</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Inefficient Energy Management</h3>
+                        <p>Energy companies struggle with unpredictable demand patterns</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>High Operational Costs</h3>
+                        <p>Lack of forecasting leads to wastage and increased expenses</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚠️</div>
+                        <h3>Grid Instability</h3>
+                        <p>Renewable energy variability causes power supply issues</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📉</div>
+                        <h3>Limited Analytics</h3>
+                        <p>Traditional systems lack predictive insights and AI capabilities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Solution -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>💡 Our Solution</h2>
+                <h3>PowerAI: Intelligent Energy Management Platform</h3>
+                <ul style="max-width: 800px; margin: 2rem auto;">
+                    <li><span class="highlight">24-Hour AI Forecasting</span> - Predict energy demand with 95%+ accuracy</li>
+                    <li><span class="highlight">Real-Time Monitoring</span> - Track renewable generation and consumption live</li>
+                    <li><span class="highlight">Multi-Tenant Architecture</span> - Serve multiple energy companies simultaneously</li>
+                    <li><span class="highlight">Advanced ML Models</span> - ARIMA, LSTM, and Ensemble predictions</li>
+                    <li><span class="highlight">Cost Optimization</span> - Reduce operational costs by up to 30%</li>
+                    <li><span class="highlight">SDG 7 Compliant</span> - Aligned with UN Sustainable Development Goals</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Key Features -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>✨ Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Forecasting</h3>
+                        <p>ARIMA, LSTM, and SARIMAX models for accurate predictions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Interactive Dashboards</h3>
+                        <p>Real-time KPIs, charts, and analytics visualization</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Secure Authentication</h3>
+                        <p>User management with password reset via email</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💎</div>
+                        <h3>Freemium Model</h3>
+                        <p>4-tier subscription: Free, Starter, Pro, Enterprise</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Multi-Tenant SaaS</h3>
+                        <p>Support multiple companies with data isolation</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Real-Time Updates</h3>
+                        <p>Live energy monitoring and instant alerts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Technology Stack -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🛠️ Technology Stack</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Frontend</h3>
+                        <p>Streamlit 1.29+</p>
+                        <p>Plotly Interactive Charts</p>
+                        <p>Responsive Design</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Backend</h3>
+                        <p>Python 3.10+</p>
+                        <p>Multi-tenant Architecture</p>
+                        <p>RESTful API Design</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>AI/ML Models</h3>
+                        <p>TensorFlow 2.13+ (LSTM)</p>
+                        <p>Statsmodels (ARIMA/SARIMAX)</p>
+                        <p>Scikit-learn (Preprocessing)</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Infrastructure</h3>
+                        <p>Streamlit Cloud Hosting</p>
+                        <p>GitHub CI/CD</p>
+                        <p>AWS S3 (Model Storage)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Market Opportunity -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>📈 Market Opportunity</h2>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number">$84B</div>
+                        <div class="stat-label">Global Energy Management Systems Market by 2028</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">15%</div>
+                        <div class="stat-label">CAGR Growth Rate</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">26%</div>
+                        <div class="stat-label">Africa's Renewable Energy Growth</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">600M+</div>
+                        <div class="stat-label">People in Africa Need Reliable Energy</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 3rem;">Target Markets</h3>
+                <ul style="max-width: 800px; margin: 2rem auto;">
+                    <li>Solar energy companies in Lesotho, South Africa, Kenya</li>
+                    <li>Wind power operators across East and Southern Africa</li>
+                    <li>Hydroelectric facilities seeking optimization</li>
+                    <li>Government energy agencies and utilities</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Business Model -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>💰 Business Model</h2>
+                <h3>Freemium SaaS with 4 Subscription Tiers</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Free</h3>
+                        <p><strong>$0/month</strong></p>
+                        <p>14-day trial</p>
+                        <p>Basic features</p>
+                        <p>1 user</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Starter</h3>
+                        <p><strong>$49/month</strong></p>
+                        <p>24h forecasting</p>
+                        <p>Real-time monitoring</p>
+                        <p>5 users</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Professional</h3>
+                        <p><strong>$149/month</strong></p>
+                        <p>Advanced analytics</p>
+                        <p>Custom reports</p>
+                        <p>15 users</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Enterprise</h3>
+                        <p><strong>$499/month</strong></p>
+                        <p>Unlimited features</p>
+                        <p>Priority support</p>
+                        <p>Unlimited users</p>
+                    </div>
+                </div>
+                <p style="margin-top: 3rem; font-size: 1.3rem;">
+                    <span class="highlight">Revenue Streams:</span> Subscriptions, Premium Features, Custom Development, Training & Support
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Competitive Advantage -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🏆 Competitive Advantage</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Africa-First Design</h3>
+                        <p>Built specifically for African energy markets and infrastructure challenges</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Advanced AI Models</h3>
+                        <p>Multiple forecasting models (ARIMA, LSTM, Ensemble) vs. competitors' single approach</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Affordable Pricing</h3>
+                        <p>Up to 70% cheaper than international alternatives like AutoGrid or EnergyHub</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Quick Deployment</h3>
+                        <p>Cloud-based SaaS - no infrastructure investment needed</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Local Support</h3>
+                        <p>On-ground team understanding local challenges and regulations</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Multi-Tenant Architecture</h3>
+                        <p>One platform serves multiple companies - unique in African market</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Traction & Achievements -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🚀 Traction & Achievements</h2>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number">95%+</div>
+                        <div class="stat-label">Forecast Accuracy</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Registered Companies</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Uptime on Streamlit Cloud</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Certificates Achieved</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 3rem;">Key Milestones</h3>
+                <ul style="max-width: 800px; margin: 2rem auto;">
+                    <li>Successfully deployed on Streamlit Cloud: <span class="highlight">powerai-lesotho.streamlit.app</span></li>
+                    <li>Implemented 3 AI models (ARIMA, LSTM, SARIMAX) with 50MB-4GB sizes</li>
+                    <li>Built complete authentication system with email password reset</li>
+                    <li>Achieved <span class="highlight">Best Top Achiever</span> in Samsung Innovation Campus</li>
+                    <li>Completed Power Learn Project Software Development Scholarship</li>
+                    <li>Full GitHub repository with comprehensive documentation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Roadmap -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🗺️ Roadmap</h2>
+                <div class="roadmap-container">
+                    <div class="roadmap-item">
+                        <h3>Q1 2026 - Product Enhancement</h3>
+                        <p>✓ Launch mobile app (iOS/Android)</p>
+                        <p>✓ Integrate with smart meters and IoT devices</p>
+                        <p>✓ Add WhatsApp alerts for African users</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Q2 2026 - Market Expansion</h3>
+                        <p>✓ Onboard 10 energy companies in Lesotho & South Africa</p>
+                        <p>✓ Partner with government energy departments</p>
+                        <p>✓ Launch in Kenya and Tanzania</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Q3 2026 - Scale & Revenue</h3>
+                        <p>✓ Reach 50+ paying customers</p>
+                        <p>✓ Achieve $50K MRR</p>
+                        <p>✓ Expand to Nigeria and Ghana</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Q4 2026 - Innovation</h3>
+                        <p>✓ Launch blockchain energy trading module</p>
+                        <p>✓ AI-powered carbon credit tracking</p>
+                        <p>✓ Series A fundraising round</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Team -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>👥 Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">HS</div>
+                        <h3>Hlomohang Sethuntsa</h3>
+                        <p style="color: #7fb069; margin-bottom: 1rem;">Founder & Lead Developer</p>
+                        <p style="font-size: 1.2rem;">Diploma in Computer Systems Engineering, Certificates in Coding & Programming, Artificial Intelligence, AI Literacy, Software Development with specialization in AI for Software Engineering, 2 years experience at OnePower Lesotho</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">🎓</div>
+                        <h3>Achievements</h3>
+                        <p style="color: #7fb069; margin-bottom: 0.5rem;">Lerotholi Polytechnic (1x)</p>
+                        <p style="color: #7fb069; margin-bottom: 0.5rem;">Samsung Innovation Campus (2x)</p>
+                        <p style="color: #7fb069; margin-bottom: 0.5rem;">Best Top Achiever</p>
+                        <p style="color: #7fb069; margin-bottom: 0.5rem;">Power Learn Project (2x)</p>
+                        <p style="font-size: 1.2rem; margin-top: 1rem;">Graduating Dec 12, 2025</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">💼</div>
+                        <h3>Looking For</h3>
+                        <p style="color: #7fb069; margin-bottom: 1rem;">Co-Founder (Business)</p>
+                        <p style="font-size: 1.2rem;">Sales & marketing expert with African energy market experience</p>
+                        <p style="color: #7fb069; margin-top: 1.5rem;">Advisors</p>
+                        <p style="font-size: 1.2rem;">Energy industry veterans, AI/ML experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Call to Action -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 style="margin-bottom: 2rem;">🚀 Join Us in Transforming Energy Management</h2>
+                <div class="investment-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">$200K</div>
+                        <div class="stat-label">Seed Funding Goal</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">18 months</div>
+                        <div class="stat-label">Runway</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">$1M</div>
+                        <div class="stat-label">Revenue Target (Year 2)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Customers Target</div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why Invest in PowerAI?</h3>
+                <ul class="investment-reasons">
+                    <li>Massive market opportunity in growing African renewable energy sector</li>
+                    <li>Proven technology with working product deployed on cloud</li>
+                    <li>Affordable solution addressing critical energy management challenges</li>
+                    <li>Aligned with UN SDG 7 - Affordable and Clean Energy</li>
+                    <li>Strong technical foundation with award-winning developer</li>
+                </ul>
+                <div class="cta-buttons">
+                    <a href="https://powerai-lesotho.streamlit.app" target="_blank" class="cta-button">View Live Demo</a>
+                    <a href="https://github.com/Hlomohangcue/PLP-Final-Project-PowerAI" target="_blank" class="cta-button">View on GitHub</a>
+                </div>
+                <div class="contact-info">
+                    <p>📧 <span class="highlight">hlomohangsethuntsa3@gmail.com</span></p>
+                    <p>🌐 <span class="highlight">powerai-lesotho.streamlit.app</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" onclick="previousSlide()">← Previous</button>
+        <button class="nav-button" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 12;
+        const container = document.getElementById('slidesContainer');
+        const slideNumber = document.getElementById('slideNumber');
+
+        function updateSlide() {
+            container.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            slideNumber.textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Touch navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+    </script>
+</body>
+</html>
