@@ -13,10 +13,27 @@ Professional pitch deck for PowerAI - AI-Powered Renewable Energy Management Pla
 ### Option 1: View Locally
 1. Open `index.html` in any web browser
 2. Navigate using arrow keys, space bar, or navigation buttons
-3. Touch gestures supported on mobile devices
+3. Touch gesures supported on mobile devices
 
-### Option 2: Deploy to GitHub Pages
-See `DEPLOYMENT.md` for detailed instructions
+### Option 2: Deploy to Web (Recommended for Sharing) ⭐
+**Want to share your pitch deck with investors?** Deploy it to the web for FREE!
+
+📘 **[See Complete Deployment Guide →](DEPLOYMENT.md)**
+
+The deployment guide includes:
+- ✅ Step-by-step GitHub Pages deployment (FREE forever)
+- ✅ Beginner-friendly instructions with screenshots
+- ✅ Both web interface and command-line methods
+- ✅ Troubleshooting for common issues
+- ✅ Custom domain setup
+- ✅ Analytics integration
+- ✅ Best practices for investor presentations
+
+**Quick Deploy (5 minutes):**
+1. Create GitHub repository
+2. Upload `index.html`
+3. Enable GitHub Pages in Settings
+4. Get your live URL: `https://YOUR_USERNAME.github.io/REPO_NAME/`
 
 ### Option 3: Create in Canva
 Use content from `CANVA_CONTENT.md` with Canva templates
@@ -79,19 +96,24 @@ Replace the emoji logo with an image:
 
 ## 🌐 Deployment Options
 
-### 1. GitHub Pages (Free)
-- Easiest deployment method
-- Free custom URL
-- See `DEPLOYMENT.md` for step-by-step guide
+### 1. GitHub Pages (Recommended - FREE) ⭐
+- ✅ Completely FREE hosting forever
+- ✅ Professional URL for investor communications
+- ✅ Easy updates with version control
+- ✅ No credit card required
+- ✅ Automatic HTTPS/SSL
+- 📘 **[Complete Step-by-Step Guide →](DEPLOYMENT.md)**
 
 ### 2. Netlify/Vercel (Free)
 - Drag and drop deployment
 - Custom domain support
 - Automatic HTTPS
+- See `DEPLOYMENT.md` for instructions
 
 ### 3. Any Web Server
 - Upload `index.html` to any hosting provider
 - Single HTML file, no dependencies needed
+- Works with traditional hosting services
 
 ## 📊 Statistics Used
 

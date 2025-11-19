@@ -10,8 +10,12 @@ Option 1: View Locally
 Open index.html in any web browser
 Navigate using arrow keys, space bar, or navigation buttons
 Touch gestures supported on mobile devices
-Option 2: Deploy to GitHub Pages
-See DEPLOYMENT.md for detailed instructions
+Option 2: Deploy to GitHub Pages (Recommended for Sharing)
+📘 **[Complete Deployment Guide →](pitch-deck/DEPLOYMENT.md)**
+- FREE hosting forever
+- Professional URL for investors
+- Step-by-step instructions included
+- Works in 10-15 minutes
 
 Option 3: Create in Canva
 Use content from CANVA_CONTENT.md with Canva templates
