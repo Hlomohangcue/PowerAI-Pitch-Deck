@@ -627,19 +627,36 @@ Perfect for business cards and printed materials!
 
 ### 🐛 Comprehensive Troubleshooting Guide
 
-#### **Problem: GitHub Pages not showing my site**
+#### **Problem: GitHub Pages not showing my site (404 Error)**
 
-**Symptoms:** Settings say "Your site is live" but URL shows 404 error
+**Symptoms:** Settings say "Your site is live" but URL shows 404 error or "File not found"
+
+**Common Cause:** Mismatch between where GitHub Pages is looking for `index.html` and where it's actually located.
 
 **Solutions:**
+
+**If using GitHub Actions workflow (.github/workflows/static.yml):**
+1. ✅ Check the workflow file and verify the `path:` setting:
+   - If your index.html is in `pitch-deck` folder, the path should be: `path: 'pitch-deck'`
+   - If your index.html is in root folder, the path should be: `path: '.'`
+2. ✅ Go to repository → Actions tab → Check if the workflow ran successfully
+3. ✅ If workflow failed, click on the failed run to see error details
+4. ✅ After fixing workflow file, commit changes to trigger a new deployment
+
+**If using Settings → Pages (branch deployment):**
+1. ✅ Check index.html is in the correct location based on your Pages settings:
+   - If Pages is set to "/ (root)", index.html must be in repository root
+   - If Pages is set to "/docs", index.html must be in the docs folder
+2. ✅ Verify repository is PUBLIC (Settings → General → Visibility)
+3. ✅ Confirm branch is set to "main" (Settings → Pages)
+
+**General troubleshooting:**
 1. ✅ Wait 5 minutes - first deployment takes time
-2. ✅ Check index.html is in repository ROOT (not in a subfolder)
-3. ✅ Verify repository is PUBLIC (Settings → General → Visibility)
-4. ✅ Confirm branch is set to "main" (Settings → Pages)
-5. ✅ Try accessing: `https://YOUR_USERNAME.github.io/PowerAI-Pitch-Deck/index.html`
-6. ✅ Check GitHub Status: https://www.githubstatus.com/
-7. ✅ Disable browser extensions (especially ad blockers)
-8. ✅ Try incognito/private browsing mode
+2. ✅ Try accessing with /index.html: `https://YOUR_USERNAME.github.io/PowerAI-Pitch-Deck/index.html`
+3. ✅ Check GitHub Status: https://www.githubstatus.com/
+4. ✅ Disable browser extensions (especially ad blockers)
+5. ✅ Try incognito/private browsing mode
+6. ✅ Check GitHub Actions tab to see if deployment succeeded or failed
 
 ---
 
